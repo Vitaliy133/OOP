@@ -1,3 +1,27 @@
+def average_grade(dict):
+    score = 0
+    rew_num = 0
+    for course in dict:
+        score += sum(dict[course])
+        rew_num += len(dict[course])
+    return (score / rew_num)
+
+def rate_hw_course(student, course):
+    score = 0
+    rew_num = 0
+    for person in student:
+        score += sum(person.grades[course])
+        rew_num += len(person.grades[course])
+    return (score / rew_num)
+
+def rate_lect_course(lector, course):
+    score = 0
+    rew_num = 0
+    for person in lector:
+        score += sum(person.grades[course])
+        rew_num += len(person.grades[course])
+    return (score / rew_num)
+
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -17,7 +41,19 @@ class Student:
             return 'Ошибка'
     
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: \nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}\nЗавершенные курсы: {", ".join(self.finished_courses)}'
+        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {average_grade(self.grades)} \nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}\nЗавершенные курсы: {", ".join(self.finished_courses)}'
+    
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            return (average_grade(self.grades)) < (average_grade(other.grades))
+            
+    def __gt__(self, other):
+        if isinstance(other, Student):
+            return (average_grade(self.grades)) > (average_grade(other.grades))
+            
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            return (average_grade(self.grades)) == (average_grade(other.grades))
 
 
 class Mentor:
@@ -33,7 +69,19 @@ class Lecturer(Mentor):
         self.grades = {}
 
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: '
+        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {average_grade(self.grades)}'
+    
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            return (average_grade(self.grades)) < (average_grade(other.grades))
+    
+    def __gt__(self, other):
+        if isinstance(other, Lecturer):
+            return (average_grade(self.grades)) > (average_grade(other.grades))
+        
+    def ___eq__(self, other):
+        if isinstance(other, Lecturer):
+            return (average_grade(self.grades)) == (average_grade(other.grades))
 
 
 class Reviewer(Mentor):
