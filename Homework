@@ -99,3 +99,69 @@ class Reviewer(Mentor):
         
     def __str__(self):
         return f'Имя: {self.name}\nФамилия: {self.surname}'
+
+student1 = Student('Peter', 'Parker', 'male')
+student1.finished_courses = ['Web-design', 'Python']
+student1.courses_in_progress = ['IT for management', 'Data science']
+
+student2 = Student('Bruce', 'Banner', 'male')
+student2.finished_courses = ['Django', 'Web-development']
+student2.courses_in_progress = ['Data science', 'Python']
+
+lecturer1 = Lecturer('Steve', 'Voznyak')
+lecturer1.courses_attached = ['Python', 'Django', 'Data science']
+
+lecturer2 = Lecturer('Mark', 'Zuckerberg')
+lecturer2.courses_attached = ['IT for management', 'Data science']
+
+reviewer1 = Reviewer('Bill', 'Gates')
+reviewer1.courses_attached = ['Python', 'Data science']
+
+reviewer2 = Reviewer('Marcus', 'Notch')
+reviewer2.courses_attached = ['Django', 'Data science']
+
+reviewer1.rate_hw(student1,'Data science',5)
+reviewer1.rate_hw(student1,'Data science',7)
+reviewer1.rate_hw(student1,'Data science',6)
+
+reviewer2.rate_hw(student1,'Data science',3)
+reviewer2.rate_hw(student1,'Data science',2)
+reviewer2.rate_hw(student1,'Data science',5)
+
+reviewer1.rate_hw(student2,'Data science',10)
+reviewer1.rate_hw(student2,'Data science',4)
+
+reviewer2.rate_hw(student2,'Data science',4)
+reviewer2.rate_hw(student2,'Data science',2)
+
+student1.rate_lect(lecturer1, 'Data science', 10)
+student1.rate_lect(lecturer1, 'Data science', 9)
+student1.rate_lect(lecturer1, 'Data science', 10)
+
+student2.rate_lect(lecturer1, 'Data science', 3)
+student2.rate_lect(lecturer1, 'Data science', 2)
+
+student1.rate_lect(lecturer2,'Data science',9)
+student1.rate_lect(lecturer2, 'Data science', 10)
+student1.rate_lect(lecturer2, 'Data science', 9)
+
+student2.rate_lect(lecturer2,'Data science',3)
+student2.rate_lect(lecturer2,'Data science',9)
+
+print('Лекторы:')
+print(lecturer1, end='\n'*2)
+print(lecturer2, end='\n'*2)
+
+print('Студенты:')
+print(student1, end='\n'*2)
+print(student2, end='\n'*2)
+
+print('Эксперты:')
+print(reviewer1, end='\n'*2)
+print(reviewer2, end='\n'*2)
+
+print(f'Средняя оценка за курс "Data Science" лекторов:"{lecturer1.name} {lecturer1.surname}" и "{lecturer2.name} {lecturer2.surname}"- {rate_lect_course([lecturer1, lecturer2], 'Data science')}')
+
+print()
+
+print(f'Средняя оценка домашних заданий за курс "Data Science": {rate_hw_course([student1, student2], 'Data science')}')
