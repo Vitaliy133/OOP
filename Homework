@@ -45,15 +45,24 @@ class Student:
     
     def __lt__(self, other):
         if isinstance(other, Student):
-            return (average_grade(self.grades)) < (average_grade(other.grades))
+            if (average_grade(self.grades)) < (average_grade(other.grades)):
+                return(f'Средняя оценка ученика {self.name} {self.surname} меньше, чем у {other.name} {other.surname}')
+            else:
+                return(f'Средняя оценка лектора {self.name} {self.surname} больше, чем у {other.name} {other.surname}')
             
     def __gt__(self, other):
         if isinstance(other, Student):
-            return (average_grade(self.grades)) > (average_grade(other.grades))
-            
+            if (average_grade(self.grades)) > (average_grade(other.grades)):
+                return(f'Средняя оценка лектора {self.name} {self.surname} больше, чем у {other.name} {other.surname}')
+            else:
+                return(f'Средняя оценка лектора {self.name} {self.surname} меньше, чем у {other.name} {other.surname}')           
+    
     def __eq__(self, other):
         if isinstance(other, Student):
-            return (average_grade(self.grades)) == (average_grade(other.grades))
+            if (average_grade(self.grades)) == (average_grade(other.grades)):
+                return(f'Средняя оценка лектора {self.name} {self.surname} равна {other.name} {other.surname}')
+            else:
+                return(f'Средняя оценка лектора {self.name} {self.surname} не равна {other.name} {other.surname}')
 
 
 class Mentor:
@@ -73,15 +82,24 @@ class Lecturer(Mentor):
     
     def __lt__(self, other):
         if isinstance(other, Lecturer):
-            return (average_grade(self.grades)) < (average_grade(other.grades))
+            if (average_grade(self.grades)) < (average_grade(other.grades)):
+                return(f'Средняя оценка лектора {self.name} {self.surname} меньше, чем у {other.name} {other.surname}')
+            else:
+                return(f'Средняя оценка лектора {self.name} {self.surname} больше, чем у {other.name} {other.surname}')
     
     def __gt__(self, other):
         if isinstance(other, Lecturer):
-            return (average_grade(self.grades)) > (average_grade(other.grades))
+            if (average_grade(self.grades)) > (average_grade(other.grades)):
+                return(f'Средняя оценка лектора {self.name} {self.surname} больше, чем у {other.name} {other.surname}')
+            else:
+                return(f'Средняя оценка лектора {self.name} {self.surname} меньше, чем у {other.name} {other.surname}')
         
     def ___eq__(self, other):
         if isinstance(other, Lecturer):
-            return (average_grade(self.grades)) == (average_grade(other.grades))
+            if (average_grade(self.grades)) == (average_grade(other.grades)):
+                return(f'Средняя оценка лектора {self.name} {self.surname} равна {other.name} {other.surname}')
+            else:
+                return(f'Средняя оценка лектора {self.name} {self.surname} не равна {other.name} {other.surname}')
 
 
 class Reviewer(Mentor):
@@ -160,8 +178,10 @@ print('Эксперты:')
 print(reviewer1, end='\n'*2)
 print(reviewer2, end='\n'*2)
 
-print(f'Средняя оценка за курс "Data Science" лекторов:"{lecturer1.name} {lecturer1.surname}" и "{lecturer2.name} {lecturer2.surname}"- {rate_lect_course([lecturer1, lecturer2], 'Data science')}')
+print(f'Средняя оценка за курс "Data Science" лекторов:"{lecturer1.name} {lecturer1.surname}" и "{lecturer2.name} {lecturer2.surname}"- {rate_lect_course([lecturer1, lecturer2], 'Data science')}\n')
 
-print()
+print(f'Средняя оценка домашних заданий за курс "Data Science": {rate_hw_course([student1, student2], 'Data science')}\n')
 
-print(f'Средняя оценка домашних заданий за курс "Data Science": {rate_hw_course([student1, student2], 'Data science')}')
+print(f'{lecturer1 > lecturer2}\n')
+
+print(student1 < student2)
